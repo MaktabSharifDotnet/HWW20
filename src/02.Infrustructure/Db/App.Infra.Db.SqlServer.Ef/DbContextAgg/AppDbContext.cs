@@ -1,5 +1,7 @@
 ﻿using App.Domain.Core._Common.Entities;
+using App.Domain.Core.AppointmentRequestAgg.Entities;
 using App.Domain.Core.CarModelAgg.Entities;
+using App.Domain.Core.FailedRequestLogAgg.Entities;
 using App.Domain.Core.OperatorAgg.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,7 +23,8 @@ namespace App.Infra.Db.SqlServer.Ef.DbContextAgg
         public DbSet<Operator> Operators { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
 
-        public DbSet<BaseAppointmentRequest> BaseAppointmentRequests { get; set; }
+        public DbSet<AppointmentRequest> AppointmentRequests { get; set; }
+        public DbSet<FailedRequestLog> FailedRequestLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -12,6 +12,6 @@ namespace App.Domain.Core.OperatorAgg.Entities
         public int Id { get; set; }
         public string Username { get; set; }
         public string PasswordHash { get; set; }
-
+        public bool IsDeleted { get; set; } = false;
     }
 }

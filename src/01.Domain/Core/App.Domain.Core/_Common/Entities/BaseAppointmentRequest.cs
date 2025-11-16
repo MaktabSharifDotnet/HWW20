@@ -21,5 +21,7 @@ namespace App.Domain.Core._Common.Entities
         public int CarModelId { get; set; }
         public CarModel CarModel { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
     }
 }
