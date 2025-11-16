@@ -1,22 +1,31 @@
-﻿using App.Domain.Core._Common.Entities;
-using App.Domain.Core.AppointmentRequestAgg.Enums;
+﻿using App.Domain.Core.AppointmentRequestAgg.Enums;
 using App.Domain.Core.CarModelAgg.Entities;
 using App.Domain.Core.OperatorAgg.Entities;
 using App.Domain.Core.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace App.Domain.Core.AppointmentRequestAgg.Entities
+public class AppointmentRequest
 {
-    public class AppointmentRequest : BaseAppointmentRequest
-    {
+    public int Id { get; set; }
 
-        public int? OperatorId { get; set; }      
-        public Operator? Operator { get; set; }
-        public AppointmentStatusEnum Status { get; set; }= AppointmentStatusEnum.Pending;
+    public string OwnerName { get; set; }
+    public MobileNumber Mobile { get; set; }
+    public string NationalCode { get; set; }
+    public string LicensePlate { get; set; }
+    public string Address { get; set; }
 
-    }
+    public int Year { get; set; }
+    public DateTime RequestDate { get; set; }
+
+    public RequestStatusEnum Status { get; set; }  
+
+    public int CarModelId { get; set; }
+    public CarModel CarModel { get; set; }
+
+    public int? OperatorId { get; set; }
+    public Operator Operator { get; set; }
+
+    public bool IsDeleted { get; set; }
+
+    public List<RequestLog> Logs { get; set; }
 }
+

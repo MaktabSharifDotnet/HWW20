@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.AppointmentRequestAgg.Enums
 {
-    public enum AppointmentStatusEnum
+    public enum RequestStatusEnum
     {
         Pending = 1,  
         Approved = 2, 

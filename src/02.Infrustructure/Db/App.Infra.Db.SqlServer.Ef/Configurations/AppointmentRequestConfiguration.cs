@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.AppointmentRequestAgg.Entities;
+﻿
 using App.Domain.Core.AppointmentRequestAgg.Enums;
 using App.Infra.Db.SqlServer.Ef.Configurations.ValueConverters; 
 using Microsoft.EntityFrameworkCore;
@@ -52,12 +52,16 @@ namespace App.Infra.Db.SqlServer.Ef.Configurations
 
           
             builder.HasOne(ar => ar.CarModel)
-                .WithMany()
+                .WithMany(c=>c.AppointmentRequests)
                 .HasForeignKey(ar => ar.CarModelId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasMany(x => x.Logs)
+              .WithOne(x => x.AppointmentRequest)
+             .HasForeignKey(x => x.RequestId);
+
             builder.HasOne(ar => ar.Operator)
-                .WithMany() 
+                .WithMany(o => o.AppointmentRequests) 
                 .HasForeignKey(ar => ar.OperatorId)
                 .IsRequired(false) 
                 .OnDelete(DeleteBehavior.NoAction);

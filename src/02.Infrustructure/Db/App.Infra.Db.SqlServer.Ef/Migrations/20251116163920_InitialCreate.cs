@@ -47,15 +47,16 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OwnerName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false),
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     NationalCode = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
                     LicensePlate = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CarModelId = table.Column<int>(type: "int", nullable: false),
+                    OperatorId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -66,31 +67,39 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
                         column: x => x.CarModelId,
                         principalTable: "CarModels",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AppointmentRequests_Operators_OperatorId",
+                        column: x => x.OperatorId,
+                        principalTable: "Operators",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "FailedRequestLogs",
+                name: "RequestLogs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    NationalCode = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
-                    LicensePlate = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CarModelId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    RequestId = table.Column<int>(type: "int", nullable: false),
+                    OldStatus = table.Column<int>(type: "int", nullable: false),
+                    NewStatus = table.Column<int>(type: "int", nullable: false),
+                    ChangedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OperatorId = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FailedRequestLogs", x => x.Id);
+                    table.PrimaryKey("PK_RequestLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FailedRequestLogs_CarModels_CarModelId",
-                        column: x => x.CarModelId,
-                        principalTable: "CarModels",
+                        name: "FK_RequestLogs_AppointmentRequests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "AppointmentRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RequestLogs_Operators_OperatorId",
+                        column: x => x.OperatorId,
+                        principalTable: "Operators",
                         principalColumn: "Id");
                 });
 
@@ -100,25 +109,35 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
                 column: "CarModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FailedRequestLogs_CarModelId",
-                table: "FailedRequestLogs",
-                column: "CarModelId");
+                name: "IX_AppointmentRequests_OperatorId",
+                table: "AppointmentRequests",
+                column: "OperatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestLogs_OperatorId",
+                table: "RequestLogs",
+                column: "OperatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestLogs_RequestId",
+                table: "RequestLogs",
+                column: "RequestId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "RequestLogs");
+
+            migrationBuilder.DropTable(
                 name: "AppointmentRequests");
 
             migrationBuilder.DropTable(
-                name: "FailedRequestLogs");
+                name: "CarModels");
 
             migrationBuilder.DropTable(
                 name: "Operators");
-
-            migrationBuilder.DropTable(
-                name: "CarModels");
         }
     }
 }
