@@ -10,6 +10,9 @@ namespace App.Domain.Core.AppointmentRequestAgg.Enums
     {
         Pending = 1,  
         Approved = 2, 
-        Rejected = 3
+        Rejected = 3,
+        Failed_AgeCriteria = 4,
+        Failed_DailyLimit = 5
+
     }
 }

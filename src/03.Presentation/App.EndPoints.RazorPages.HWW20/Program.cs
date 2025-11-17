@@ -1,4 +1,5 @@
 
+using App.Domain.Core.AppointmentRequestAgg.Contracts.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -7,7 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options =>
-              options.UseSqlServer("Server=DESKTOP-M2BLLND\\SQLEXPRESS;Database=HWW20;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;"));
+           
+options.UseSqlServer("Server=DESKTOP-M2BLLND\\SQLEXPRESS;Database=HWW20;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;"));
+
+//builder.Services.AddScoped<IAppointmentRequestRepository, AppointmentRequestRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

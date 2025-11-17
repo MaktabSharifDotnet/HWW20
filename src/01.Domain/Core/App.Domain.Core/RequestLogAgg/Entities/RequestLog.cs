@@ -14,7 +14,7 @@ public class RequestLog
     public DateTime ChangedAt { get; set; }
 
     public int? OperatorId { get; set; }
-    public Operator Operator { get; set; }
+    public Operator? Operator { get; set; }
 
     public string Description { get; set; }
 }

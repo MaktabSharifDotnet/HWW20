@@ -16,13 +16,13 @@ public class AppointmentRequest
     public int Year { get; set; }
     public DateTime RequestDate { get; set; }
 
-    public RequestStatusEnum Status { get; set; }  
+    public RequestStatusEnum Status { get; set; } = RequestStatusEnum.Pending; 
 
     public int CarModelId { get; set; }
     public CarModel CarModel { get; set; }
 
     public int? OperatorId { get; set; }
-    public Operator Operator { get; set; }
+    public Operator? Operator { get; set; }
 
     public bool IsDeleted { get; set; }
 
