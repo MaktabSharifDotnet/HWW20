@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="AppointmentRequestAgg\Contracts\AppService\" />
-    <Folder Include="AppointmentRequestAgg\Contracts\Service\" />
-  </ItemGroup>
-
 </Project>
