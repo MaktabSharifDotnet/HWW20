@@ -8,6 +8,7 @@ namespace App.Domain.Core.AppointmentRequestAgg.Enums
 {
     public enum RequestStatusEnum
     {
+        None = 0,
         Pending = 1,  
         Approved = 2, 
         Rejected = 3,

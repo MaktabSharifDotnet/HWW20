@@ -1,10 +1,20 @@
 
 using App.Domain.AppServices.AppointmentRequest;
+using App.Domain.AppServices.CarModelAgg;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Repository;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
-using App.Domain.Services.AppointmentRequest;
+using App.Domain.Core.CarModelAgg.Contratcs.AppService;
+using App.Domain.Core.CarModelAgg.Contratcs.Repository;
+using App.Domain.Core.CarModelAgg.Contratcs.Service;
+using App.Domain.Core.OperatorAgg.Contracts.Repository;
+using App.Domain.Core.OperatorAgg.Contracts.Service;
+using App.Domain.Services.AppointmentRequestAgg;
+using App.Domain.Services.CarModelAgg;
+using App.Domain.Services.OperatorAgg;
 using App.Infra.Data.Repos.Ef.AppointmentRequestAgg;
+using App.Infra.Data.Repos.Ef.CarModelAgg;
+using App.Infra.Data.Repos.Ef.OperatorAgg;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -19,7 +29,11 @@ options.UseSqlServer("Server=DESKTOP-M2BLLND\\SQLEXPRESS;Database=HWW20;Integrat
 builder.Services.AddScoped<IAppointmentRequestRepository, AppointmentRequestRepository>();
 builder.Services.AddScoped<IAppointmentRequestService, AppointmentRequestService>();
 builder.Services.AddScoped<IAppointmentRequestAppService, AppointmentRequestAppService>();
-
+builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
+builder.Services.AddScoped<ICarModelSerivce, CarModelSerivce>();
+builder.Services.AddScoped<ICarModelAppSerivce, CarModelAppSerivce>();
+builder.Services.AddScoped<IOperatorRepository , OperatorRepository>();
+builder.Services.AddScoped<IOperatorService, OperatorService>();
 
 
 var app = builder.Build();

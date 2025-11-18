@@ -10,8 +10,10 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.Repository
 {
     public interface IAppointmentRequestRepository
     {
-        public int Create(RegisterInfoDto registerInfo, RequestStatusEnum status);
+        public int Create(AppointmentRequest appointmentRequest);
         public int GetCountByDate(DateTime requestDate);
+        public List<AppointmentRequestSummaryDto> GetAll();
+        public int ChangeStatus(ChangeStatusInfoDto changeStatusInfoDto);
 
     }
 }

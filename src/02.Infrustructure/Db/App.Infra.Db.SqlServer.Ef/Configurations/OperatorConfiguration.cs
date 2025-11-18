@@ -11,7 +11,7 @@ namespace App.Infra.Db.SqlServer.Ef.Configurations
             builder.ToTable("Operators");
             builder.HasKey(o => o.Id);
             builder.Property(o => o.Username).IsRequired().HasMaxLength(300);
-            builder.Property(o => o.PasswordHash).IsRequired().HasMaxLength(1000);
+            builder.Property(o => o.Password).IsRequired().HasMaxLength(1000);
             builder.HasQueryFilter(o => !o.IsDeleted);
         }
     }
