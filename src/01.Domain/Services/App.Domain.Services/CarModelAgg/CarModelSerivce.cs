@@ -11,6 +11,11 @@ namespace App.Domain.Services.CarModelAgg
 {
     public class CarModelSerivce(ICarModelRepository carModelRepository) : ICarModelSerivce
     {
+        public List<CarModelDto> GetAll()
+        {
+          return carModelRepository.GetAll();
+        }
+
         public CarModelDto? GetById(int carModelId)
         {
            var carModelDto= carModelRepository.GetById(carModelId);
@@ -20,5 +25,6 @@ namespace App.Domain.Services.CarModelAgg
             }
             return carModelDto;
         }
+        
     }
 }

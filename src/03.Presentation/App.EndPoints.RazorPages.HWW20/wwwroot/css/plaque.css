@@ -1,0 +1,62 @@
+﻿/* -------- پلاک خودرو -------- */
+
+.plaque-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 2px solid #222;
+    border-radius: 6px;
+    width: fit-content;
+    background: #ffffff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) inset;
+}
+
+.plaque-blue-strip {
+    width: 12px;
+    height: 55px;
+    background: #0033cc;
+    border-radius: 3px;
+}
+
+.plaque-input {
+    width: 55px;
+    padding: 5px 8px;
+    border: 1px solid #777;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.plaque-letter {
+    width: 70px !important;
+}
+
+.plaque-iran {
+    width: 45px;
+}
+
+.iran-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.iran-code-text {
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.iran-code input {
+    font-size: 18px;
+}
+
+/* ریسپانسیو */
+@media (max-width: 576px) {
+    .plaque-container {
+        transform: scale(0.9);
+    }
+}

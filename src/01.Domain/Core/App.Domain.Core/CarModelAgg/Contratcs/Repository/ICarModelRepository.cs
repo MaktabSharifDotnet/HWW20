@@ -12,5 +12,6 @@ namespace App.Domain.Core.CarModelAgg.Contratcs.Repository
     public interface ICarModelRepository
     {
         public CarModelDto GetById(int carModelId);
+        public List<CarModelDto> GetAll();
     }
 }

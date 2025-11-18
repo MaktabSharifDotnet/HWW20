@@ -10,5 +10,6 @@ namespace App.Domain.Core.CarModelAgg.Contratcs.Service
     public interface ICarModelSerivce
     {
         public CarModelDto? GetById(int carModelId);
+        public List<CarModelDto> GetAll();
     }
 }

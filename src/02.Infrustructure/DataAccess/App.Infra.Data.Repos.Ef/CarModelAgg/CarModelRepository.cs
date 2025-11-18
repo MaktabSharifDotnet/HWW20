@@ -16,9 +16,19 @@ namespace App.Infra.Data.Repos.Ef.CarModelAgg
                 .Where(c => c.Id == carModelId)
                 .Select(c => new CarModelDto
                 {
+                    Id = c.Id,
                    Name = c.Name,
                    Company = c.Company,
                 }).FirstOrDefault();
+        }
+        public List<CarModelDto> GetAll() 
+        {
+            return _context.CarModels.Select(c=>new CarModelDto 
+            {
+               Id = c.Id,
+               Company = c.Company,
+               Name = c.Name,
+            }).ToList();
         }
     }
 }

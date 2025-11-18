@@ -9,6 +9,7 @@ namespace App.Domain.Core.CarModelAgg.Dtos
 {
     public class CarModelDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public CompanyEnum Company { get; set; }
     }
