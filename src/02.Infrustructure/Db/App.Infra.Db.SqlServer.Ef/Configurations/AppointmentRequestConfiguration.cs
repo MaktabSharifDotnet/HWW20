@@ -38,11 +38,11 @@ namespace App.Infra.Db.SqlServer.Ef.Configurations
             builder.Property(ar => ar.RequestDate)
                 .IsRequired();
 
-           
+
             builder.Property(ar => ar.Mobile)
                 .IsRequired()
-                .HasMaxLength(11) 
-                .HasConversion(new MobileNumberConverter()); 
+                .HasMaxLength(11);
+              
 
            
             builder.Property(ar => ar.Status)

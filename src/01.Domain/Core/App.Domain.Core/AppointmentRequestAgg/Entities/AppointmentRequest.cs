@@ -8,7 +8,7 @@ public class AppointmentRequest
     public int Id { get; set; }
 
     public string OwnerName { get; set; }
-    public MobileNumber Mobile { get; set; }
+    public string Mobile { get; set; }
     public string NationalCode { get; set; }
     public string LicensePlate { get; set; }
     public string Address { get; set; }

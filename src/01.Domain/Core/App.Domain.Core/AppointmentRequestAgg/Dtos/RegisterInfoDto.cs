@@ -11,7 +11,7 @@ namespace App.Domain.Core.AppointmentRequestAgg.Dtos
     public class RegisterInfoDto
     {
         public string OwnerName { get; set; }
-        public MobileNumber Mobile { get; set; }
+        public string Mobile { get; set; }
         public string NationalCode { get; set; }
         public string LicensePlate { get; set; }
         public string Address { get; set; }
