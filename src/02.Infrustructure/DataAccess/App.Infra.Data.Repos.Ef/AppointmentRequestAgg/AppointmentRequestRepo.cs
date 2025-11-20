@@ -36,6 +36,15 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
             }).ToList();
         }
 
+        public AppointmentRequestSummaryDto GetById(int id)
+        {
+           return _context.AppointmentRequests.Where(a=>a.Id== id).Select(a => new AppointmentRequestSummaryDto() 
+            {
+               Status = a.Status,
+            })
+            .First();
+        }
+
         public int GetCountByRequsetDate(DateTime RequsetDate)
         {
            return _context.AppointmentRequests.Where(a => a.RequestDate.Date == RequsetDate.Date).Count();

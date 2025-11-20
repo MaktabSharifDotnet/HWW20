@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequestAgg
 {
     public class CreateModel(IAppointmentRequestAppService appointmentRequestAppService,
-        ICarModelAppService carModelAppService) : PageModel
+        ICarModelAppService carModelAppSerivce) : PageModel
     {
         [BindProperty]
         public RegisterInfoDto RegisterInfoDto { get; set; }
@@ -34,7 +34,7 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequestAgg
 
         public void OnGet()
         {
-            CarModelDtos = carModelAppService.GetAll();
+            CarModelDtos = carModelAppSerivce.GetAll();
         }
 
         public IActionResult OnPost()

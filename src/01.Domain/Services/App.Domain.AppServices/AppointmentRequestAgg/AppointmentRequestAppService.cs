@@ -21,5 +21,10 @@ namespace App.Domain.AppServices.AppointmentRequestAgg
         {
             return appointmentRequestService.GetAll();
         }
+
+        public AppointmentRequestSummaryDto GetById(int id)
+        {
+          return  appointmentRequestService.GetById(id);
+        }
     }
 }

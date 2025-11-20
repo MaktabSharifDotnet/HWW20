@@ -14,5 +14,7 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.Repo
         public int GetCountByRequsetDate(DateTime RequsetDate);       
         public bool IsExistLicensePlate(string licensePlate);
         public int Create(AppointmentRequest appointmentRequest);
+        public AppointmentRequestSummaryDto GetById(int id);
+
     }
 }

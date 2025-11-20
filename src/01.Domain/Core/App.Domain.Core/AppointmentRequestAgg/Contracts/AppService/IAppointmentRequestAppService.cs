@@ -11,5 +11,6 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.AppService
     {
         public List<AppointmentRequestSummaryDto> GetAll();
         public int Create(RegisterInfoDto registerInfoDto);
+        public AppointmentRequestSummaryDto GetById(int id);
     }
 }

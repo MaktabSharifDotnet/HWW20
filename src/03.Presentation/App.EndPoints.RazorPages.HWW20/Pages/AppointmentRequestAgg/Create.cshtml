@@ -2,6 +2,37 @@
 @model App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequestAgg.CreateModel
 @{
 }
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["WarningMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["WarningMessage"]
+    </div>
+}
+
+@if (TempData["FailureMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["FailureMessage"]
+    </div>
+}
+@if (TempData["ErrorMessageForMobile"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessageForMobile"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 
 <h1>فرم ثبت درخواست </h1>
 
@@ -92,5 +123,6 @@
         <div class="submit-button">
             <button type="submit">ذخیره درخواست</button>
         </div>
+    </div>
 </form>
-</div>
+

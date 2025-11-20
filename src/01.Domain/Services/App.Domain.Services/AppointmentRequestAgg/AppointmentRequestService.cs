@@ -101,6 +101,12 @@ namespace App.Domain.Services.AppointmentRequestAgg
         {
            return appointmentRequestRepo.GetAll();
         }
+
+        public AppointmentRequestSummaryDto GetById(int id)
+        {
+          return  appointmentRequestRepo.GetById(id);
+        }
+
         private bool IsEvenDay(DateTime requsetDate) 
         {
             return requsetDate.DayOfWeek == DayOfWeek.Saturday
