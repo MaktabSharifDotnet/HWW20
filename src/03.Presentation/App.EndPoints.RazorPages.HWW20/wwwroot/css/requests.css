@@ -1,0 +1,86 @@
+﻿/* ================================
+   جدول مدیریت درخواست‌ها - تم آبی/سبز
+   ================================ */
+
+/* بدنه صفحه */
+body {
+    font-family: 'IRANSans', sans-serif;
+    background: #f3f8ff;
+    margin: 0;
+    padding: 20px;
+}
+
+/* عنوان صفحه */
+h1 {
+    color: #0a4c8c;
+    margin-bottom: 20px;
+}
+
+/* جدول */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+    /* هدر جدول */
+    table th {
+        background: linear-gradient(135deg, #0a84ff, #2dbb98);
+        color: white;
+        padding: 14px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    /* ردیف‌ها */
+    table td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #e6e6e6;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* خطوط زیبرا استایل */
+    table tr:nth-child(even) {
+        background: #f6fbff;
+    }
+
+/* دکمه ها */
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: white;
+    transition: 0.2s;
+}
+
+    /* دکمه پذیرش */
+    button.accept {
+        background-color: #2dbb98; /* سبز */
+    }
+
+        button.accept:hover {
+            background-color: #27a786;
+        }
+
+    /* دکمه رد */
+    button.reject {
+        background-color: #0a84ff; /* آبی */
+    }
+
+        button.reject:hover {
+            background-color: #006fe6;
+        }
+
+/* فرم کنار هم */
+td form {
+    display: inline-block;
+    margin: 0 3px;
+}

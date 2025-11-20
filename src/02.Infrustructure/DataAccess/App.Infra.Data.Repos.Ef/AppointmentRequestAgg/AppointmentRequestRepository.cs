@@ -13,7 +13,6 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
 {
     public class AppointmentRequestRepository(AppDbContext _context) : IAppointmentRequestRepository
     {
-        
 
         public int Create(AppointmentRequest appointmentRequest)
         {
@@ -41,6 +40,11 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
         { 
             return _context.AppointmentRequests.Where(a=>a.RequestDate.Date==requestDate.Date).Count();
         }
+        public bool LicensePlateIsExist(string licensePlate) 
+        {
+          return _context.AppointmentRequests.Any(a=>a.LicensePlate==licensePlate);
+        }
+      
 
         public int ChangeStatus(ChangeStatusInfoDto changeStatusInfoDto)
         {
@@ -68,6 +72,51 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
             _context.RequestLogs.Add(log);
 
            return _context.SaveChanges();
+        }
+
+        public AppointmentRequestSummaryDto? GetById(int id)
+        {
+           return _context.AppointmentRequests.Where(a => a.Id == id)
+                .Select(a => new AppointmentRequestSummaryDto 
+                {
+                    Id = a.Id,
+                    Status = a.Status,
+                    OwnerName = a.OwnerName,
+                    LicensePlate = a.LicensePlate,
+                    CarModelName = a.CarModel.Name,
+                    Company=a.CarModel.Company,
+                    RequestDate=a.RequestDate,
+
+                }).FirstOrDefault();
+        }
+
+        public List<AppointmentRequestSummaryDto> GetFiltered(AppointmentFilterDto appointmentFilterDto)
+        {
+            var query = _context.AppointmentRequests.AsQueryable();
+
+            if (appointmentFilterDto.FromDate.HasValue)
+            {
+                query = query.Where(a => a.RequestDate >= appointmentFilterDto.FromDate.Value);
+            }
+            if (appointmentFilterDto.ToDate.HasValue)
+            {
+                query = query.Where(a => a.RequestDate <= appointmentFilterDto.ToDate.Value);
+            }
+            if (appointmentFilterDto.CompanyEnum.HasValue)
+            {
+                query = query.Where(a => a.CarModel.Company == appointmentFilterDto.CompanyEnum.Value);
+            }
+            return query.Select(a => new AppointmentRequestSummaryDto
+                  {
+                      Id = a.Id,
+                      OwnerName = a.OwnerName,
+                      LicensePlate = a.LicensePlate,
+                      CarModelName = a.CarModel.Name,
+                      Company = a.CarModel.Company,
+                      RequestDate=a.RequestDate,
+                      Status = a.Status,
+
+                  }).ToList();
         }
     }
 }

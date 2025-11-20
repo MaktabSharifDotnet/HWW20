@@ -1,13 +1,16 @@
 ﻿using App.Domain.Core._common.InMemory;
+using App.Domain.Core._common.Utils;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Repository;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
 using App.Domain.Core.AppointmentRequestAgg.Dtos;
 using App.Domain.Core.AppointmentRequestAgg.Enums;
+using App.Domain.Core.AppointmentRequestAgg.Exceptions;
 using App.Domain.Core.CarModelAgg.Contratcs.Repository;
 using App.Domain.Core.CarModelAgg.Enums;
 using App.Domain.Core.RequestLogAgg.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,13 +27,11 @@ namespace App.Domain.Services.AppointmentRequestAgg
             {
                 throw new Exception("ماشینی با این مدل موجود نیست");
             }
-            
-            var currentYear = DateTime.Now.Year;
-            var carAge = DateTime.Now.Year - registerInfoDto.Year;
+         
             RequestStatusEnum status = RequestStatusEnum.Pending;
             string logDescription = "ثبت اولیه درخواست";
-
-            if (carAge>5)
+            bool checkCarAge=registerInfoDto.Year.IsCarModelTooOld();
+            if (checkCarAge)
             {
                 
                 status = RequestStatusEnum.Failed_AgeCriteria;
@@ -39,12 +40,12 @@ namespace App.Domain.Services.AppointmentRequestAgg
             }
 
 
-            if (registerInfoDto.RequestDate.DayOfWeek == DayOfWeek.Friday) 
+            if (registerInfoDto.RequestDateMiladi.DayOfWeek == DayOfWeek.Friday) 
             {
                 throw new Exception("امکان ثبت در خواست در روز جمعه نیست .");
             }
 
-            bool result=IsEvenDay(registerInfoDto.RequestDate.DayOfWeek);
+            bool result=IsEvenDay(registerInfoDto.RequestDateMiladi.DayOfWeek);
 
             if (result&&status==RequestStatusEnum.Pending)
             {
@@ -63,8 +64,16 @@ namespace App.Domain.Services.AppointmentRequestAgg
                 }
             }
 
-            int count= appointmentRequestRepository.GetCountByDate(registerInfoDto.RequestDate);
+            bool check= appointmentRequestRepository.LicensePlateIsExist(registerInfoDto.LicensePlate);
 
+            if (check)
+            {
+                throw new LicensePlateIsExistException("با این پلاک یک درخواست قبلا ثبت شده است .");
+            }
+
+
+            int count= appointmentRequestRepository.GetCountByDate(registerInfoDto.RequestDateMiladi);
+ 
             if (status == RequestStatusEnum.Pending) 
             {
                 if (count >= 10 && !result || count >= 15 && result)
@@ -81,8 +90,8 @@ namespace App.Domain.Services.AppointmentRequestAgg
                 NationalCode = registerInfoDto.NationalCode,
                 LicensePlate = registerInfoDto.LicensePlate,
                 Address = registerInfoDto.Address,
-                Year = registerInfoDto.Year,
-                RequestDate = registerInfoDto.RequestDate,
+                Year = registerInfoDto.Year.ToGregorianYear(),
+                RequestDate = registerInfoDto.RequestDateMiladi.Date,
                 CarModelId = registerInfoDto.CarModelId,
                 Status = status,
                 OperatorId = null,
@@ -123,6 +132,21 @@ namespace App.Domain.Services.AppointmentRequestAgg
                    day == DayOfWeek.Monday ||
                    day == DayOfWeek.Wednesday;
         }
+    
 
+        public AppointmentRequestSummaryDto? GetById(int id)
+        {
+            return appointmentRequestRepository.GetById(id);
+        }
+
+        public bool LicensePlateIsExist(string licensePlate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<AppointmentRequestSummaryDto> GetFiltered(AppointmentFilterDto appointmentFilterDto)
+        {
+           return appointmentRequestRepository.GetFiltered(appointmentFilterDto);
+        }
     }
 }

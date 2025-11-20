@@ -1,0 +1,26 @@
+﻿@page
+@model App.EndPoints.RazorPages.HWW20.Pages.OperatorAgg.LoginModel
+@{
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<h1>صفحه لاگین</h1>
+<form method="post">
+
+   <div>
+      <label asp-for="LogInInfoDto.Username">نام کاربری</label>
+      <input asp-for="LogInInfoDto.Username" type="text" required />
+  </div>
+   <div>
+      <label asp-for="LogInInfoDto.Password">رمز عبور</label>
+      <input asp-for="LogInInfoDto.Password" type="text" required />
+  </div>
+  <div>
+      <button type="submit" >ورود</button>
+  </div>
+
+</form>

@@ -31,5 +31,15 @@ namespace App.Domain.AppServices.AppointmentRequest
 
             return appointmentRequestService.ChangeStatus(changeStatusInfoDto);
         }
+
+        public AppointmentRequestSummaryDto? GetById(int id)
+        {
+           return appointmentRequestService.GetById(id);
+        }
+
+        public List<AppointmentRequestSummaryDto> GetFiltered(AppointmentFilterDto appointmentFilterDto)
+        {
+           return appointmentRequestService.GetFiltered(appointmentFilterDto);
+        }
     }
 }

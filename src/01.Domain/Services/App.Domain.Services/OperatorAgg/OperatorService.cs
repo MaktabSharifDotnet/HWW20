@@ -12,6 +12,11 @@ namespace App.Domain.Services.OperatorAgg
 {
     public class OperatorService(IOperatorRepository operatorRepository) : IOperatorService
     {
+        public Operator GetByUsername(string username)
+        {
+           return operatorRepository.GetByUsername(username);
+        }
+
         public int Login(string username, string password)
         {
             Operator operatorDb=operatorRepository.GetByUsername(username);

@@ -17,7 +17,8 @@ namespace App.Domain.Core.AppointmentRequestAgg.Dtos
         public string Address { get; set; }
 
         public int Year { get; set; }
-        public DateTime RequestDate { get; set; }
+        public string RequestDate { get; set; }
+        public DateTime RequestDateMiladi { get; set; }
 
         public int CarModelId { get; set; }
         

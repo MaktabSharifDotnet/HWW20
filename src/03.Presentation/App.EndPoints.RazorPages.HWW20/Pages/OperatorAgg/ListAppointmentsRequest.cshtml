@@ -1,0 +1,68 @@
+﻿@page
+@model App.EndPoints.RazorPages.HWW20.Pages.OperatorAgg.ListAppointmentsRequestModel
+@{
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/requests.css" />
+}
+
+<h1>لیست درخواست ها </h1>
+
+<form >
+    از تاریخ (شمسی):
+    <input type="text" name="FromDate" placeholder="مثال: 1403/11/05" />
+
+    تا تاریخ (شمسی):
+    <input type="text" name="ToDate" placeholder="مثال: 1403/11/20" />
+
+    <select name="Company">
+        <option value="">همه</option>
+        <option value="2">ایران خودرو</option>
+        <option value="1">سایپا</option>
+      
+    </select>
+
+    <button type="submit">فیلتر</button>
+</form>
+
+
+
+<table>
+
+    <tr>
+        <th>نام مالک</th>
+        <th> پلاک</th>
+        <th> نام مدل</th>
+        <th> نام کارخانه</th>
+        <th> تاریخ درخواست</th>
+        <th>وضعیت </th>
+    </tr>
+    @foreach (var request in Model.AppointmentRequestSummaryDto)
+    {
+        <tr>
+
+            <td>@request.OwnerName</td>
+            <td>@request.LicensePlate</td>
+            <td>@request.CarModelName</td>
+            <td>@request.Company</td>
+            <td>@request.RequestDateShamsi</td>
+            <td>
+                @request.Status
+            </td>
+            <td>
+                <form method="post" asp-page-handler="Accept" asp-route-id="@request.Id" style="display:inline">
+                    <button type="submit" class="accept">پذیرش</button>
+                </form>
+
+                <form method="post" asp-page-handler="Reject" asp-route-id="@request.Id" style="display:inline">
+                    <button type="submit" class="reject">رد</button>
+                </form>
+
+            </td>
+
+
+        </tr>
+
+    }
+
+</table>

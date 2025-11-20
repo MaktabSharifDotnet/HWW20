@@ -12,5 +12,9 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.AppService
         public int Create(RegisterInfoDto registerInfoDto);
         public List<AppointmentRequestSummaryDto> GetAll();
         public int ChangeStatus(ChangeStatusInfoDto changeStatusInfoDto);
+        public AppointmentRequestSummaryDto? GetById(int id);
+
+        public List<AppointmentRequestSummaryDto> GetFiltered(AppointmentFilterDto appointmentFilterDto);
+
     }
 }

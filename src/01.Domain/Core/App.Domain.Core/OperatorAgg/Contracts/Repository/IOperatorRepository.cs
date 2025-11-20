@@ -10,6 +10,8 @@ namespace App.Domain.Core.OperatorAgg.Contracts.Repository
     public interface IOperatorRepository
     {
         public Operator GetByUsername(string username);
+
+        
        
     }
 }

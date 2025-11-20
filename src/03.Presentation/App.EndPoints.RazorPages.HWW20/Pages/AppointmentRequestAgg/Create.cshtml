@@ -5,7 +5,39 @@
 <link rel="stylesheet" href="~/css/form_styles.css" />
 <div class="form-container">
     <h1>ثبت درخواست نوبت خودرو</h1>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["WarningMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["WarningMessage"]
+        </div>
+    }
 
+    @if (TempData["FailureMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["FailureMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessageForMobile"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessageForMobile"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+   
+    
     <form method="post" class="form-body">
         <div class="form-grid">
 
@@ -24,8 +56,7 @@
           
             <div class="form-group">
                 <label asp-for="RegisterInfoDto.NationalCode">کد ملی</label>
-                <input asp-for="RegisterInfoDto.NationalCode" type="text" placeholder="کد ملی مالک">
-               
+                <input asp-for="RegisterInfoDto.NationalCode" type="text"  placeholder="کد ملی مالک">
             </div>
 
 

@@ -9,8 +9,8 @@ namespace App.Domain.Core.AppointmentRequestAgg.Dtos
         public string OwnerName { get; set; }
         public string LicensePlate { get; set; }
         public string CarModelName { get; set; } 
-        public CompanyEnum Company { get; set; } 
-
+        public CompanyEnum Company { get; set; }
+        public string RequestDateShamsi { get; set; }
         public DateTime RequestDate { get; set; }
         public RequestStatusEnum Status { get; set; }
     }

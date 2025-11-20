@@ -14,6 +14,11 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.Repository
         public int GetCountByDate(DateTime requestDate);
         public List<AppointmentRequestSummaryDto> GetAll();
         public int ChangeStatus(ChangeStatusInfoDto changeStatusInfoDto);
+        public AppointmentRequestSummaryDto? GetById(int id);
+        public bool LicensePlateIsExist(string licensePlate);
+        public List<AppointmentRequestSummaryDto> GetFiltered(AppointmentFilterDto appointmentFilterDto);
+
+
 
     }
 }

@@ -1,12 +1,14 @@
 
 using App.Domain.AppServices.AppointmentRequest;
 using App.Domain.AppServices.CarModelAgg;
+using App.Domain.AppServices.OperatorAgg;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Repository;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
 using App.Domain.Core.CarModelAgg.Contratcs.AppService;
 using App.Domain.Core.CarModelAgg.Contratcs.Repository;
 using App.Domain.Core.CarModelAgg.Contratcs.Service;
+using App.Domain.Core.OperatorAgg.Contracts.AppService;
 using App.Domain.Core.OperatorAgg.Contracts.Repository;
 using App.Domain.Core.OperatorAgg.Contracts.Service;
 using App.Domain.Services.AppointmentRequestAgg;
@@ -34,6 +36,7 @@ builder.Services.AddScoped<ICarModelSerivce, CarModelSerivce>();
 builder.Services.AddScoped<ICarModelAppSerivce, CarModelAppSerivce>();
 builder.Services.AddScoped<IOperatorRepository , OperatorRepository>();
 builder.Services.AddScoped<IOperatorService, OperatorService>();
+builder.Services.AddScoped<IOperatorAppService, OperatorAppService>();
 
 
 var app = builder.Build();
