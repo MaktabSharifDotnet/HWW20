@@ -1,4 +1,10 @@
 
+using App.Domain.AppServices.AppointmentRequestAgg;
+using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
+using App.Domain.Core.AppointmentRequestAgg.Contracts.Repo;
+using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
+using App.Domain.Services.AppointmentRequestAgg;
+using App.Infra.Data.Repos.Ef.AppointmentRequestAgg;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -8,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options =>
               options.UseSqlServer("Server=DESKTOP-M2BLLND\\SQLEXPRESS;Database=HWW20;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;"));
+
+builder.Services.AddScoped<IAppointmentRequestRepo , AppointmentRequestRepo>();
+builder.Services.AddScoped<IAppointmentRequestService, AppointmentRequestService>();
+builder.Services.AddScoped<IAppointmentRequestAppService, AppointmentRequestAppService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,14 +1,14 @@
 ﻿using App.Domain.Core.AppointmentRequestAgg.Enums;
 using App.Domain.Core.CarModelAgg.Entities;
 using App.Domain.Core.OperatorAgg.Entities;
-using App.Domain.Core.ValueObjects;
+
 
 public class AppointmentRequest
 {
     public int Id { get; set; }
 
     public string OwnerName { get; set; }
-    public MobileNumber Mobile { get; set; }
+    public string Mobile { get; set; }
     public string NationalCode { get; set; }
     public string LicensePlate { get; set; }
     public string Address { get; set; }
@@ -22,7 +22,7 @@ public class AppointmentRequest
     public CarModel CarModel { get; set; }
 
     public int? OperatorId { get; set; }
-    public Operator Operator { get; set; }
+    public Operator? Operator { get; set; }
 
     public bool IsDeleted { get; set; }
 
