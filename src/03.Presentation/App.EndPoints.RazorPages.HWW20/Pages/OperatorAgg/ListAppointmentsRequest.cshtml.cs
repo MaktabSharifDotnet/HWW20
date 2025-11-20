@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace App.EndPoints.RazorPages.HWW20.Pages.OperatorAgg
-{
+{//
     public class ListAppointmentsRequestModel(IAppointmentRequestAppService appointmentRequestAppService) : PageModel
     {
         public List<AppointmentRequestSummaryDto> AppointmentRequestSummaryDto { get; set; }
