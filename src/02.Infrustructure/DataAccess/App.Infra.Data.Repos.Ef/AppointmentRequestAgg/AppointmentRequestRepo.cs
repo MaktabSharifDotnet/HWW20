@@ -10,6 +10,13 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
 {
     public class AppointmentRequestRepo(AppDbContext _context) : IAppointmentRequestRepo
     {
+        public int Create(AppointmentRequest appointmentRequest)
+        {
+            _context.AppointmentRequests.Add(appointmentRequest);
+            _context.SaveChanges();
+            return appointmentRequest.Id;
+        }
+
         public List<AppointmentRequestSummaryDto> GetAll()
         {
            return _context.AppointmentRequests.Select(a => new AppointmentRequestSummaryDto() 
@@ -27,6 +34,16 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
                Status=a.Status,
                OperatorId=a.OperatorId,
             }).ToList();
+        }
+
+        public int GetCountByRequsetDate(DateTime RequsetDate)
+        {
+           return _context.AppointmentRequests.Where(a => a.RequestDate.Date == RequsetDate.Date).Count();
+        }
+
+        public bool IsExistLicensePlate(string licensePlate)
+        {
+          return  _context.AppointmentRequests.Any(a=>a.LicensePlate==licensePlate);
         }
     }
 }

@@ -10,5 +10,9 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.Repo
     public interface IAppointmentRequestRepo
     {
         public List<AppointmentRequestSummaryDto> GetAll();
+      
+        public int GetCountByRequsetDate(DateTime RequsetDate);       
+        public bool IsExistLicensePlate(string licensePlate);
+        public int Create(AppointmentRequest appointmentRequest);
     }
 }

@@ -1,10 +1,16 @@
 
 using App.Domain.AppServices.AppointmentRequestAgg;
+using App.Domain.AppServices.CarModelAgg;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Repo;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
+using App.Domain.Core.CarModelAgg.Contracts.AppService;
+using App.Domain.Core.CarModelAgg.Contracts.Repository;
+using App.Domain.Core.CarModelAgg.Contracts.Service;
 using App.Domain.Services.AppointmentRequestAgg;
+using App.Domain.Services.CarModelAgg;
 using App.Infra.Data.Repos.Ef.AppointmentRequestAgg;
+using App.Infra.Data.Repos.Ef.CarModelAgg;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -18,6 +24,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAppointmentRequestRepo , AppointmentRequestRepo>();
 builder.Services.AddScoped<IAppointmentRequestService, AppointmentRequestService>();
 builder.Services.AddScoped<IAppointmentRequestAppService, AppointmentRequestAppService>();
+builder.Services.AddScoped<ICarModelRepo, CarModelRepo>();
+builder.Services.AddScoped<ICarModelService, CarModelService>();
+builder.Services.AddScoped<ICarModelAppService, CarModelAppService>();
 
 var app = builder.Build();
 

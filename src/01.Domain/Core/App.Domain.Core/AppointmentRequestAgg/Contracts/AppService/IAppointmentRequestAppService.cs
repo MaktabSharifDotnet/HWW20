@@ -10,5 +10,6 @@ namespace App.Domain.Core.AppointmentRequestAgg.Contracts.AppService
     public interface IAppointmentRequestAppService
     {
         public List<AppointmentRequestSummaryDto> GetAll();
+        public int Create(RegisterInfoDto registerInfoDto);
     }
 }

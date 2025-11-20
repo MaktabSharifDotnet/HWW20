@@ -26,6 +26,6 @@ public class AppointmentRequest
 
     public bool IsDeleted { get; set; }
 
-    public List<RequestLog> Logs { get; set; }
+    public List<RequestLog> Logs { get; set; } = [];
 }
 

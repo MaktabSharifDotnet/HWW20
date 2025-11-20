@@ -9,8 +9,14 @@ using System.Threading.Tasks;
 
 namespace App.Domain.AppServices.AppointmentRequestAgg
 {
-    public class AppointmentRequestAppService(IAppointmentRequestService appointmentRequestService) : IAppointmentRequestAppService
+    public class AppointmentRequestAppService(IAppointmentRequestService appointmentRequestService) 
+        : IAppointmentRequestAppService
     {
+        public int Create(RegisterInfoDto registerInfoDto)
+        {
+          return  appointmentRequestService.Create(registerInfoDto);
+        }
+
         public List<AppointmentRequestSummaryDto> GetAll()
         {
             return appointmentRequestService.GetAll();

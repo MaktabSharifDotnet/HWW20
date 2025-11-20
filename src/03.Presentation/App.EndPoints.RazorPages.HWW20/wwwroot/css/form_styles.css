@@ -1,0 +1,149 @@
+﻿﻿ /*
+ * استایل‌های فرم ثبت درخواست نوبت (Appointment Request Form Styles)
+ * این استایل‌ها به صورت راست به چپ (RTL) برای زبان فارسی تنظیم شده‌اند.
+ */
+:root {
+    --primary-color: #4a90e2; /* آبی روشن */
+    --secondary-color: #f7f7f7; /* خاکستری روشن برای پس زمینه */
+    --text-color: #333;
+    --border-color: #ddd;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    background-color: var(--secondary-color);
+    font-family: Vazir, Tahoma, sans-serif; /* فونت مناسب فارسی */
+    direction: rtl; /* تنظیم جهت نوشتار به راست به چپ */
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid #eee;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+/* ساختار گرید برای فرم در دسکتاپ */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+    .form-group label {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .form-group input[type="text"],
+    .form-group select {
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        background-color: #fff;
+        width: 100%; /* مطمئن شدن از اینکه عرض کامل را می‌گیرد */
+        box-sizing: border-box;
+    }
+
+        .form-group input[type="text"]:focus,
+        .form-group select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+            outline: none;
+        }
+
+/* استایل دکمه ذخیره */
+.submit-button {
+    grid-column: 1 / -1; /* دکمه را در عرض کامل نمایش می‌دهد */
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+    .submit-button button {
+        padding: 12px 35px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s;
+        font-weight: 500;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .submit-button button:hover {
+            background-color: #3b7ad0; /* رنگ کمی تیره‌تر */
+            transform: translateY(-1px);
+        }
+
+        .submit-button button:active {
+            transform: translateY(0);
+        }
+
+/* واکنش‌گرایی: در صفحه نمایش‌های کوچک، گرید به صورت تک ستونی نمایش داده می‌شود */
+@media (max-width: 768px) {
+    .form-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-button {
+        padding: 0 10px;
+    }
+}
+
+.plate-container {
+    display: flex;
+    direction: ltr; /* پلاک باید چپ‌چین باشد تا ترتیب اعداد درست دیده شود */
+    gap: 5px;
+    border: 2px solid #333;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: fit-content;
+}
+
+.plate-input {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* استایل برای مخفی کردن دکمه‌های اسپینر در اینپوت نامبر */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
