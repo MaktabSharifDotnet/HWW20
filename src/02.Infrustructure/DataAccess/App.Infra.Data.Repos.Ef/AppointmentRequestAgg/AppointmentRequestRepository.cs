@@ -55,6 +55,7 @@ namespace App.Infra.Data.Repos.Ef.AppointmentRequestAgg
             {
                 throw new Exception("درخواست یافت نشد.");
             }
+            request.OperatorId = changeStatusInfoDto.OperatorId;
             var log = new RequestLog
             {
                 RequestId = request.Id,

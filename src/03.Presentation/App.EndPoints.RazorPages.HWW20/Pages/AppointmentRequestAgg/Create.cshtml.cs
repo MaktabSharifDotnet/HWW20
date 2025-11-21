@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.AppFileAgg;
+﻿using App.Domain.Core._common.InMemory;
+using App.Domain.Core.AppFileAgg;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
 using App.Domain.Core.AppointmentRequestAgg.Dtos;
 using App.Domain.Core.AppointmentRequestAgg.Enums;
@@ -70,6 +71,7 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
                         }
                     }
                 }
+                
                 int id = appointmentRequestAppService.Create(RegisterInfoDto);
                 if (id > 0)
                 {
