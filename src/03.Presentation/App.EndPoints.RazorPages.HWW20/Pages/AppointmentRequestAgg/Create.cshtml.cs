@@ -92,6 +92,7 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
                     else if (createdRequest.Status == RequestStatusEnum.Rejected)
                     {
                         TempData["ErrorMessage"] = "درخواست شما به دلیل عدم تطابق قوانین رد شد.";
+                        CarModelDtos = carModelAppSerivce.GetAll();
                         return Page();
                     }
                     
