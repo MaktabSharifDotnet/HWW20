@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.CarModelAgg.Entities;
+﻿using App.Domain.Core.AppFileAgg;
+using App.Domain.Core.CarModelAgg.Entities;
 using App.Domain.Core.OperatorAgg.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -14,7 +15,9 @@ public class AppDbContext : DbContext
     public DbSet<Operator> Operators { get; set; }
     public DbSet<RequestLog> RequestLogs { get; set; }
 
-  
+    public DbSet<AppFile> AppFiles { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

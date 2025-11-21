@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infra.Db.SqlServer.Ef.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251120123247_AppFiles")]
+    partial class AppFiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,16 +32,21 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AppointmentRequestId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Path")
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("AppointmentRequestId");
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
 
                     b.ToTable("AppFiles");
                 });
@@ -159,9 +167,6 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("AppFileId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CarModelId")
                         .HasColumnType("int");
 
@@ -248,17 +253,6 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
                     b.ToTable("RequestLogs");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.AppFileAgg.AppFile", b =>
-                {
-                    b.HasOne("AppointmentRequest", "AppointmentRequest")
-                        .WithMany("Images")
-                        .HasForeignKey("AppointmentRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppointmentRequest");
-                });
-
             modelBuilder.Entity("AppointmentRequest", b =>
                 {
                     b.HasOne("App.Domain.Core.CarModelAgg.Entities.CarModel", "CarModel")
@@ -306,8 +300,6 @@ namespace App.Infra.Db.SqlServer.Ef.Migrations
 
             modelBuilder.Entity("AppointmentRequest", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Logs");
                 });
 #pragma warning restore 612, 618

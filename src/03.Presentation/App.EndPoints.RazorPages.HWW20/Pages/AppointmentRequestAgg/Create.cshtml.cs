@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
+﻿using App.Domain.Core.AppFileAgg;
+using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
 using App.Domain.Core.AppointmentRequestAgg.Dtos;
 using App.Domain.Core.AppointmentRequestAgg.Enums;
 using App.Domain.Core.AppointmentRequestAgg.Exceptions;
@@ -6,12 +7,14 @@ using App.Domain.Core.CarModelAgg.Contratcs.AppService;
 using App.Domain.Core.CarModelAgg.Dtos;
 using App.Domain.Core.Exceptions;
 using App.EndPoints.RazorPages.HWW20.Pages.Extensions;
+using App.Infra.Data.Repos.Ef.AppFileAgg;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
 {
-    public class CreateModel(IAppointmentRequestAppService appointmentRequestAppService , ICarModelAppSerivce carModelAppSerivce ) : PageModel
+    public class CreateModel(IAppointmentRequestAppService appointmentRequestAppService
+        , IFileUploader fileUploader, ICarModelAppSerivce carModelAppSerivce ) : PageModel
     {
         [BindProperty]
         public RegisterInfoDto RegisterInfoDto { get; set; }
@@ -31,6 +34,9 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
         {
             "الف", "ب", "پ", "ت", "ث", "ج", "د", "ز", "س", "ش", "ص", "ط", "ع", "ف", "ق", "ک", "گ", "ل", "م", "ن", "و", "ه", "ی", "ژ", "معلولین"
         };
+
+        [BindProperty]
+        public List<IFormFile> UploadedImages { get; set; }
         public void OnGet()
         {
             CarModelDtos=carModelAppSerivce.GetAll();
@@ -48,6 +54,21 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
                 {
                     TempData["ErrorMessageForMobile"] = "فرمت شماره همراه نامعتبر است ";
                     return Page();
+                }
+                if (UploadedImages != null && UploadedImages.Count > 0)
+                {
+                   
+                    foreach (var file in UploadedImages)
+                    {
+                
+                        if (file.Length > 0)
+                        {
+
+                            string path = fileUploader.Upload(file, "CarImages");
+
+                            RegisterInfoDto.ImagePaths.Add(path);
+                        }
+                    }
                 }
                 int id = appointmentRequestAppService.Create(RegisterInfoDto);
                 if (id > 0)

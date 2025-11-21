@@ -2,6 +2,7 @@
 using App.Domain.AppServices.AppointmentRequest;
 using App.Domain.AppServices.CarModelAgg;
 using App.Domain.AppServices.OperatorAgg;
+using App.Domain.Core.AppFileAgg;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.AppService;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Repository;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
@@ -14,9 +15,11 @@ using App.Domain.Core.OperatorAgg.Contracts.Service;
 using App.Domain.Services.AppointmentRequestAgg;
 using App.Domain.Services.CarModelAgg;
 using App.Domain.Services.OperatorAgg;
+using App.Infra.Data.Repos.Ef.AppFileAgg;
 using App.Infra.Data.Repos.Ef.AppointmentRequestAgg;
 using App.Infra.Data.Repos.Ef.CarModelAgg;
 using App.Infra.Data.Repos.Ef.OperatorAgg;
+
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -37,6 +40,8 @@ builder.Services.AddScoped<ICarModelAppSerivce, CarModelAppSerivce>();
 builder.Services.AddScoped<IOperatorRepository , OperatorRepository>();
 builder.Services.AddScoped<IOperatorService, OperatorService>();
 builder.Services.AddScoped<IOperatorAppService, OperatorAppService>();
+builder.Services.AddScoped<IFileUploader, FileUploader>();
+
 
 
 var app = builder.Build();

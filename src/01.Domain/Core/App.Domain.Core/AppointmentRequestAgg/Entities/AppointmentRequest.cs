@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.AppointmentRequestAgg.Enums;
+﻿using App.Domain.Core.AppFileAgg;
+using App.Domain.Core.AppointmentRequestAgg.Enums;
 using App.Domain.Core.CarModelAgg.Entities;
 using App.Domain.Core.OperatorAgg.Entities;
 
@@ -26,6 +27,9 @@ using App.Domain.Core.OperatorAgg.Entities;
 
         public bool IsDeleted { get; set; }
 
+        public List<AppFile> Images { get; set; } = [];
+        public int AppFileId { get; set; } 
+       
         public List<RequestLog> Logs { get; set; } = [];
     }
 

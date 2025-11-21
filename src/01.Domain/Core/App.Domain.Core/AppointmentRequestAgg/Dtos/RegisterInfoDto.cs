@@ -21,6 +21,7 @@ namespace App.Domain.Core.AppointmentRequestAgg.Dtos
         public DateTime RequestDateMiladi { get; set; }
 
         public int CarModelId { get; set; }
-        
+
+        public List<string> ImagePaths { get; set; } = [];
     }
 }

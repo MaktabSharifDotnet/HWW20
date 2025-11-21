@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core._common.InMemory;
 using App.Domain.Core._common.Utils;
+using App.Domain.Core.AppFileAgg;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Repository;
 using App.Domain.Core.AppointmentRequestAgg.Contracts.Service;
 using App.Domain.Core.AppointmentRequestAgg.Dtos;
@@ -38,7 +39,6 @@ namespace App.Domain.Services.AppointmentRequestAgg
                 logDescription = "رد شده توسط سیستم: سن خودرو بیش از ۵ سال است.";
 
             }
-
 
             if (registerInfoDto.RequestDateMiladi.DayOfWeek == DayOfWeek.Friday) 
             {
@@ -96,19 +96,30 @@ namespace App.Domain.Services.AppointmentRequestAgg
                 Status = status,
                 OperatorId = null,
                 IsDeleted = false,
-               
+
                 Logs = new List<RequestLog>
                 {
                     new RequestLog
                     {
-                        OldStatus = RequestStatusEnum.None, 
+                        OldStatus = RequestStatusEnum.None,
                         NewStatus = status,
                         ChangedAt = DateTime.Now,
-                        OperatorId = null, 
+                        OperatorId = null,
                         Description = logDescription
                     }
+
                 }
+
+                ,
+                Images = registerInfoDto.ImagePaths.Select(path => new AppFile
+                {
+                    Path = path
+
+                }).ToList()
+
             };
+
+
             return appointmentRequestRepository.Create(appointmentRequest);
         }
 
