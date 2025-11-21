@@ -66,6 +66,11 @@ namespace App.Infra.Db.SqlServer.Ef.Configurations
                 .IsRequired(false) 
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasMany(x => x.Images)               
+               .WithOne(x => x.AppointmentRequest)  
+               .HasForeignKey(x => x.AppointmentRequestId) 
+               .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasQueryFilter(ar => !ar.IsDeleted);
         }
     }

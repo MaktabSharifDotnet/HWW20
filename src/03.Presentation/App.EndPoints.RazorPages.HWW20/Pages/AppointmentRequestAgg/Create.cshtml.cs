@@ -51,9 +51,10 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
             try
             {
                 RegisterInfoDto.RequestDateMiladi = shamsi.ToMiladi().Date;
-                if (!RegisterInfoDto.Mobile.IsValidMobileNumber()) 
+                if (!RegisterInfoDto.Mobile.IsValidMobileNumber())
                 {
                     TempData["ErrorMessageForMobile"] = "فرمت شماره همراه نامعتبر است ";
+                    CarModelDtos = carModelAppSerivce.GetAll();
                     return Page();
                 }
                 if (UploadedImages != null && UploadedImages.Count > 0)
@@ -80,14 +81,17 @@ namespace App.EndPoints.RazorPages.HWW20.Pages.AppointmentRequest
                     if (createdRequest!.Status == RequestStatusEnum.Pending)
                     {
                         TempData["SuccessMessage"] = "درخواست شما با موفقیت ثبت شد و در انتظار بررسی است.";
+                        CarModelDtos = carModelAppSerivce.GetAll();
                     }
                     else if (createdRequest.Status == RequestStatusEnum.Failed_AgeCriteria)
                     {
                         TempData["WarningMessage"] = " به دلیل سن بالای خودرو درخواست رد گردید.";
+                        CarModelDtos = carModelAppSerivce.GetAll();
                     }
                     else if (createdRequest.Status == RequestStatusEnum.Failed_DailyLimit)
                     {
                         TempData["WarningMessage"] = " ظرفیت روزانه تکمیل است.";
+                        CarModelDtos = carModelAppSerivce.GetAll();
                     }
                     else if (createdRequest.Status == RequestStatusEnum.Rejected)
                     {
